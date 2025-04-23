@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:minitaskhub/app/app_theme.dart';
+import 'package:minitaskhub/auth/auth_service.dart';
 import 'package:minitaskhub/auth/signup_screen.dart';
+import 'package:minitaskhub/dashboard/dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,6 +13,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
 
+  final authService = AuthService();
+
   //controllers for email and password
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -20,6 +24,29 @@ class _LoginScreenState extends State<LoginScreen> {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  //login function
+  void login() async {
+    final email = emailController.text;
+    final password = passwordController.text;
+
+    try{
+      await authService.signInWithEmailPassword(email, password);
+
+        if (mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const DashboardScreen()),
+          );
+        }
+    }
+    catch(e){
+      if(mounted){
+        ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Error: $e")));
+      }
+    }
   }
 
   @override
@@ -48,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
             MyButton(
               label: "Login",
               onPressed: () {
-                //todo
+                login();
               },
             ),
             const SizedBox(height: 20),

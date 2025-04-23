@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minitaskhub/dashboard/profile_screen.dart';
 
 //text field
 class MyTextField extends StatelessWidget{
@@ -6,12 +7,14 @@ class MyTextField extends StatelessWidget{
   final String label;
   final bool isPassword;
   final TextEditingController controller;
+  final int maxlines;
 
   const MyTextField({
     super.key,
     required this.label,
     required this.controller,
-    this.isPassword = false
+    this.isPassword = false,
+    this.maxlines = 1,
   }); 
 
   @override
@@ -19,6 +22,7 @@ class MyTextField extends StatelessWidget{
     return TextField(
         controller: controller,
         obscureText: isPassword,
+        maxLines: maxlines,
         decoration: InputDecoration(
             labelText: label,
             border: const OutlineInputBorder()
@@ -116,7 +120,12 @@ class DashboardAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(title),
-          const Icon(Icons.notifications),
+          IconButton(
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (_)=> const ProfileScreen()));
+            },
+            icon: const Icon(Icons.person)
+          ),
         ],
       ),
     );
