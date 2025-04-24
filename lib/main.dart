@@ -9,8 +9,8 @@ void main(List<String> args) async {
 
   //supabase setup
   await Supabase.initialize(
-    anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxoem9ncW5tcXJpZ213Z3hueWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUzMTY5NzcsImV4cCI6MjA2MDg5Mjk3N30.4u2A_qrX5t0olnTUXRsFpRSbiAtTQbIRtQteNPz7F30",
-    url: "https://lhzogqnmqrigmwgxnyhw.supabase.co" 
+    anonKey: "my_key",
+    url: "my_url" 
   );
   runApp(MultiProvider(
     providers: [
