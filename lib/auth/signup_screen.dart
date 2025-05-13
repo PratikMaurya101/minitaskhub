@@ -52,8 +52,9 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: SignInUpAppBar(title:"Sign Up"),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -83,7 +84,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
           ],
         ),
-      ),
+      ),      
     );
   }
 }

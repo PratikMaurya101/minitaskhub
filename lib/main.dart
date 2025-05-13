@@ -4,13 +4,21 @@ import 'package:minitaskhub/dashboard/dashboard_screen.dart';
 import 'package:minitaskhub/dashboard/task_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 void main(List<String> args) async {
+
+  // Load the .env file
+  try {
+    await dotenv.load(fileName: ".env");
+    print("Loaded .env file successfully.");
+  } catch (e) {
+    print("Error loading .env file: $e");
+  }
 
   //supabase setup
   await Supabase.initialize(
-    anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxoem9ncW5tcXJpZ213Z3hueWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUzMTY5NzcsImV4cCI6MjA2MDg5Mjk3N30.4u2A_qrX5t0olnTUXRsFpRSbiAtTQbIRtQteNPz7F30",
-    url: "https://lhzogqnmqrigmwgxnyhw.supabase.co" 
+    anonKey: dotenv.env['ANON_KEY']!,
+    url: dotenv.env['URL']! 
   );
   runApp(MultiProvider(
     providers: [
