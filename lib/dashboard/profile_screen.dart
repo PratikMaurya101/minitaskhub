@@ -21,6 +21,8 @@ class ProfileScreen extends StatefulWidget{
 
 class _ProfileScreenState extends State<ProfileScreen> {  
 
+  final userId = Supabase.instance.client.auth.currentUser?.email!;
+
   // Log out
   void logout() async {
   try {
@@ -49,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             // Email display
             Center( child: Text(
-                  "Swap with provider logic",
+                  "Hi $userId",
                   style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
             ),    
